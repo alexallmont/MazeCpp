@@ -2,7 +2,7 @@
 #define GRAPH_GRID_HPP
 
 #include <vector>
-#include "cell.hpp"
+#include "maze/graph/cell.hpp"
 
 namespace maze
 {

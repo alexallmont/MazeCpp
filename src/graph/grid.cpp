@@ -1,4 +1,4 @@
-#include "graph/grid.hpp"
+#include "maze/graph/grid.hpp"
 
 #include <cassert>
 
