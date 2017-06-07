@@ -1,20 +1,12 @@
-cmake_minimum_required(VERSION 3.3)
-
-project(MazeCpp)
+cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 1)
-set(VERSION_PATCH 0)
-set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+# Add the demo application using maze library
+add_subdirectory(maze)
+add_executable(demo demo.cpp)
+target_link_libraries(demo mazelib)
 
-include_directories(include)
-include_directories(external)
-
-file(GLOB SOURCES "src/**/*.cpp")
-add_executable(maze_test test/main.cpp ${SOURCES})
-
+# Add unit testing
 enable_testing()
-add_test(maze_test maze_test)
+add_subdirectory(test)
