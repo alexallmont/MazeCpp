@@ -8,5 +8,7 @@ add_executable(demo demo.cpp)
 target_link_libraries(demo mazelib)
 
 # Add unit testing
+add_subdirectory(external)
+include_directories(${CATCH_INCLUDE_DIR} ${COMMON_INCLUDES})
 enable_testing()
 add_subdirectory(test)
