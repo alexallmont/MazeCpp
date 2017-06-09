@@ -1,3 +1,4 @@
+#include "catch.hpp"
 #include "maze/graph/grid.hpp"
 
 TEST_CASE("a lone cell has no neighbours", "[cell]")
