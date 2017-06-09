@@ -3,7 +3,6 @@ version: "{build}"
 os:
   - Visual Studio 2017
   - Visual Studio 2015
-  - Visual Studio 2013
 
 environment:
   matrix:
@@ -14,8 +13,6 @@ matrix:
   exclude:
     - additional_flags: "/permissive- /std:c++latest"
       os: Visual Studio 2015
-    - additional_flags: "/permissive- /std:c++latest"
-      os: Visual Studio 2013
 
 init:
   - git config --global core.autocrlf input
@@ -24,7 +21,6 @@ init:
 shallow_clone: true
 
 platform:
-  - Win32
   - x64
 
 configuration:
@@ -38,7 +34,7 @@ before_build:
 # build with MSBuild
 build:
   project: build\Project.sln
-  verbosity: detailed
+  verbosity: normal
 
 test_script:
   - cd build
