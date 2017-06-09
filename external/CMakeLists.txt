@@ -14,6 +14,8 @@ ExternalProject_Add(
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
     LOG_DOWNLOAD ON
+    CMAKE_ARGS
+    "-DCMAKE_BUILD_TYPE=${configuration}"
 )
 
 # Expose required variable (CATCH_INCLUDE_DIR) to parent scope
