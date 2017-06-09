@@ -33,12 +33,15 @@ configuration:
 before_build:
   - set CXXFLAGS=%additional_flags%
   - cmake -H. -Bbuild -A%PLATFORM%
+  - cd build
 
 build:
-  project: build\Project.sln
+  project: Project.sln
   parallel: true
   verbosity: normal
 
+build_script:
+  - cmake --build .
+
 test_script:
-  - cd build
   - ctest -V -j 2 -C %CONFIGURATION%
