@@ -37,8 +37,8 @@ before_build:
 
 # build with MSBuild
 build:
-  project: build\CatchSelfTest.sln      # path to Visual Studio solution or project
-  verbosity: normal                     # MSBuild verbosity level {quiet|minimal|normal|detailed}
+  project: build\Project.sln
+  verbosity: detailed
 
 test_script:
   - cd build
