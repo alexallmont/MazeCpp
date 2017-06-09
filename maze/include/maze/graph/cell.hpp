@@ -1,13 +1,13 @@
-#ifndef GRAPH_CELL_HPP
-#define GRAPH_CELL_HPP
+#ifndef MAZE_GRAPH_CELL_HPP
+#define MAZE_GRAPH_CELL_HPP
 
 #include <functional>
 #include <vector>
 
-#include "maze/graph/grid.hpp"
-
 namespace maze
 {
+class Grid;
+
 //------------------------------------------------------------------------------
 //! An individual cell in a 2D grid with accessors to query cells as compass
 //! points.
@@ -15,15 +15,12 @@ namespace maze
 class Cell
 {
 public:
-  Cell(Grid& grid, size_t row, size_t column) :
-    m_grid(grid),
-    m_row(row),
-    m_column(column) {}
+  Cell(Grid& grid, size_t row, size_t column);
 
-  Cell* north() const { return m_grid.cell_at(m_row - 1, m_column); }
-  Cell* east()  const { return m_grid.cell_at(m_row, m_column + 1); }
-  Cell* south() const { return m_grid.cell_at(m_row + 1, m_column); }
-  Cell* west()  const { return m_grid.cell_at(m_row, m_column - 1); }
+  Cell* north() const;
+  Cell* east() const;
+  Cell* south() const;
+  Cell* west() const;
 
 private:
   Grid&   m_grid;
@@ -34,4 +31,4 @@ private:
 //------------------------------------------------------------------------------
 }
 
-#endif // GRAPH_CELL_HPP
+#endif // MAZE_GRAPH_CELL_HPP

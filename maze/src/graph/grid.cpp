@@ -1,9 +1,5 @@
 #include "maze/graph/grid.hpp"
 
-#include <cassert>
-
-#include "maze/graph/cell.hpp"
-
 namespace maze
 {
 //------------------------------------------------------------------------------
@@ -15,7 +11,7 @@ Grid::Grid(size_t rows, size_t columns) :
   {
     for (size_t c = 0; c < m_columns; ++c)
     {
-      m_cells.emplace_back(*this, r, c);
+      m_cells.push_back(Cell(*this, r, c));
     }
   }
 }

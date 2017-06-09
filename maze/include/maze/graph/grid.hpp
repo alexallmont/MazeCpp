@@ -1,12 +1,11 @@
-#ifndef GRAPH_GRID_HPP
-#define GRAPH_GRID_HPP
+#ifndef MAZE_GRAPH_GRID_HPP
+#define MAZE_GRAPH_GRID_HPP
 
 #include <vector>
+#include "maze/graph/cell.hpp"
 
 namespace maze
 {
-class Cell;
-
 //------------------------------------------------------------------------------
 //! A 2D grid containing a rows x columns matrix of cells.
 //------------------------------------------------------------------------------
@@ -29,6 +28,7 @@ private:
   std::vector<Cell> m_cells;
 };
 
+//------------------------------------------------------------------------------
 }
 
-#endif // GRAPH_GRID_HPP
+#endif // MAZE_GRAPH_GRID_HPP
