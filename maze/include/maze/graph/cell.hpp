@@ -15,7 +15,7 @@ class Grid;
 class Cell
 {
 public:
-  Cell(Grid& grid, size_t row, size_t column);
+  Cell(Grid& grid, int row, int column);
 
   Cell* north() const;
   Cell* east() const;
@@ -23,9 +23,9 @@ public:
   Cell* west() const;
 
 private:
-  Grid&   m_grid;
-  size_t  m_row;
-  size_t  m_column;
+  Grid& m_grid;
+  int   m_row;
+  int   m_column;
 };
 
 //------------------------------------------------------------------------------

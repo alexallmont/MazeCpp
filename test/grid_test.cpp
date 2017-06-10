@@ -25,13 +25,13 @@ TEST_CASE("an empty grid is valid but its cells are not", "[grid]")
 
 TEST_CASE("a non-empty grid containts cells", "[grid]")
 {
-  constexpr size_t rows = 3;
-  constexpr size_t columns = 2;
+  constexpr int rows = 3;
+  constexpr int columns = 2;
 
   maze::Grid grid(rows, columns);
-  for (auto r = 0; r < rows; ++r)
+  for (int r = 0; r < rows; ++r)
   {
-    for (auto c = 0; c < columns; ++c)
+    for (int c = 0; c < columns; ++c)
     {
       REQUIRE(grid.cell_at(r, c) != nullptr);
     }

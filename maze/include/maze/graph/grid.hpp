@@ -12,18 +12,18 @@ namespace maze
 class Grid
 {
 public:
-  Grid(size_t rows, size_t columns);
+  Grid(int rows, int columns);
   Grid(const Grid&) = delete;
   Grid& operator=(const Grid&) = delete;
 
   Cell* cell_at(int row, int column);
 
-  size_t rows()    const { return m_rows; }
-  size_t columns() const { return m_columns; }
+  int rows()    const { return m_rows; }
+  int columns() const { return m_columns; }
 
 private:
   size_t m_rows;
-  size_t m_columns;
+  int m_columns;
 
   std::vector<Cell> m_cells;
 };

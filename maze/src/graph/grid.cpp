@@ -3,13 +3,13 @@
 namespace maze
 {
 //------------------------------------------------------------------------------
-Grid::Grid(size_t rows, size_t columns) :
+Grid::Grid(int rows, int columns) :
   m_rows(rows),
   m_columns(columns)
 {
-  for (size_t r = 0; r < m_rows; ++r)
+  for (int r = 0; r < m_rows; ++r)
   {
-    for (size_t c = 0; c < m_columns; ++c)
+    for (int c = 0; c < m_columns; ++c)
     {
       m_cells.push_back(Cell(*this, r, c));
     }
@@ -19,13 +19,11 @@ Grid::Grid(size_t rows, size_t columns) :
 //------------------------------------------------------------------------------
 Cell* Grid::cell_at(int row, int column)
 {
-  if ((row >= 0) and (column >= 0))
+  if ((row >= 0) && (column >= 0))
   {
-    size_t r = (size_t)row;
-    size_t c = (size_t)column;
-    if ((r < m_rows) and (c < m_columns))
+    if ((row < m_rows) && (column < m_columns))
     {
-      return &m_cells[(r * m_columns) + c];
+      return &m_cells[(row * m_columns) + column];
     }
   }
 

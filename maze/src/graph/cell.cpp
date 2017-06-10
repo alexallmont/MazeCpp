@@ -3,7 +3,7 @@
 namespace maze
 {
 //------------------------------------------------------------------------------
-Cell::Cell(Grid& grid, size_t row, size_t column) :
+Cell::Cell(Grid& grid, int row, int column) :
   m_grid(grid),
   m_row(row),
   m_column(column)
