@@ -141,6 +141,6 @@ private:
 };
 
 //------------------------------------------------------------------------------
-}; // namespace maze
+} // namespace maze
 
 #endif // MAZE_GRAPH_GRID2D_HPP
