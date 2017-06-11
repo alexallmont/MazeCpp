@@ -48,8 +48,8 @@ public:
 
   private:
     // Cell data is managed by the owning grid - std::array can't call constructors.
-    int       m_index;  //< Each cell has index an index of (row * ROWS + column).
-    GridType* m_grid;   //< Owning grid. This aliasing compiles away in release.
+    int       m_index = INVALID_INDEX;  //< Cell has index of (row * ROWS + column).
+    GridType* m_grid  = nullptr;        //< Owning grid; compiles away in release build.
   };
 
   //! Grid constructor initialises all contained cells.
@@ -118,10 +118,7 @@ public:
 
   //! Return an invalid cell for comparison operations.
   static constexpr Cell invalid() {
-    Cell cell;
-    cell.m_index = INVALID_INDEX;
-    cell.m_grid = nullptr;
-    return cell;
+    return Cell(); // Cells are constructed invalid by default;
   }
 
   //! Get the cell at a given row and column.
