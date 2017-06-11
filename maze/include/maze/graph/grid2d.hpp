@@ -2,6 +2,7 @@
 #define MAZE_GRAPH_GRID2D_HPP
 
 #include <array>
+#include <random>
 
 namespace maze {
 
@@ -111,7 +112,7 @@ public:
 
   //! Get a cell relative to a cell's position.
   //! dr is row offset and dc is column offset.
-  constexpr Cell relative_cell(int cell_index, int dr, int dc) {
+  constexpr Cell relative_cell(int cell_index, int dr, int dc) const {
     int row = 0;
     int column = 0;
     if (cell_row_column(cell_index, row, column)) {
@@ -123,7 +124,7 @@ public:
   }
 
   //! Get the cell at a given row and column.
-  constexpr Cell cell_at(int r, int c) {
+  constexpr Cell cell_at(int r, int c) const {
     const int index = cell_index(r, c);
     if (index == INVALID_INDEX) {
       return Cell::create_invalid();
@@ -131,6 +132,15 @@ public:
     else {
       return m_cells[index];
     }
+  }
+
+  //! Get a random cell in this grid.
+  Cell random_cell() const {
+    std::mt19937 rng;
+    rng.seed(std::random_device()());
+    std::uniform_int_distribution<std::mt19937::result_type> distribution(0, size() - 1);
+    int index = distribution(rng);
+    return m_cells[index];
   }
 
 private:
