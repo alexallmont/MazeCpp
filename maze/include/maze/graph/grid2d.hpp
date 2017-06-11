@@ -19,6 +19,12 @@ public:
     friend Grid2d;
 
   public:
+    //! Create an invalid cell. This is moot because all cells are created
+    //! invalid by default. This just improves code readability.
+    constexpr static Cell create_invalid() {
+      return Cell();
+    }
+
     //! Get this cell's index.
     constexpr int index()  const { return m_index; }
 
@@ -112,20 +118,15 @@ public:
       return cell_at(row + dr, column + dc);
     }
     else {
-      return invalid();
+      return Cell::create_invalid();
     }
-  }
-
-  //! Return an invalid cell for comparison operations.
-  static constexpr Cell invalid() {
-    return Cell(); // Cells are constructed invalid by default;
   }
 
   //! Get the cell at a given row and column.
   constexpr Cell cell_at(int r, int c) {
     const int index = cell_index(r, c);
     if (index == INVALID_INDEX) {
-      return m_invalid;
+      return Cell::create_invalid();
     }
     else {
       return m_cells[index];
@@ -134,7 +135,6 @@ public:
 
 private:
   std::array<Cell, size()> m_cells;
-  Cell m_invalid;
 };
 
 //------------------------------------------------------------------------------
