@@ -84,8 +84,15 @@ public:
 
   //! Return index of cell at (r, c) or INVALID_INDEX if not in grid.
   static constexpr int cell_index(int r, int c) {
-    // TODO bad logic: this is not catering correctly for row overflows
     int index = r * COLUMNS + c;
+
+    // Special case for invalid columns. Above arithmetic fails if column
+    // overflows onto next row, or underflows onto previous.
+    if ((c < 0) || (c >= COLUMNS)) {
+      index = INVALID_INDEX;
+    }
+
+    // TODO bad logic: this is not catering correctly for row overflows
     return valid_index(index) ? index : INVALID_INDEX;
   }
 
