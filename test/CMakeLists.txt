@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 # Add test executable
 add_executable(maze_test
-  test.cpp
+  main.cpp
   grid_test.cpp
   cell_test.cpp
 )
