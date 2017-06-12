@@ -11,10 +11,20 @@ namespace maze {
 //------------------------------------------------------------------------------
 template <int ROWS, int COLUMNS>
 class Grid2d {
-public:
+private:
   using GridType = Grid2d<ROWS, COLUMNS>;
-  enum { INVALID_INDEX = -1 };
+  enum {
+    INVALID_INDEX = -1,
+    SIZE = ROWS * COLUMNS
+  };
+  enum DirectionMask {
+    NORTH = 1 << 0,
+    EAST  = 1 << 1,
+    SOUTH = 1 << 2,
+    WEST  = 1 << 3,
+  };
 
+public:
   //! Friendly access methods for each cell in a grid.
   class Cell {
     friend Grid2d;
@@ -91,12 +101,12 @@ public:
 
   //! Return the total number of cells.
   static constexpr size_t size() {
-    return ROWS * COLUMNS;
+    return SIZE;
   }
 
   //! Return true if the cell index lies within this grid.
   static constexpr bool valid_index(int index) {
-    return (index >= 0) && (index < ROWS * COLUMNS);
+    return (index >= 0) && (index < SIZE);
   }
 
   //! Return index of cell at (r, c) or INVALID_INDEX if not in grid.
@@ -154,7 +164,8 @@ public:
   }
 
 private:
-  std::array<Cell, size()> m_cells;
+  std::array<Cell, SIZE> m_cells;     //!< 1D array of all cells in grid.
+  std::array<char, SIZE> m_linkmasks; //!< Each cell's links stored as bitmask
 };
 
 //------------------------------------------------------------------------------
