@@ -17,7 +17,7 @@ class RecursiveBacktracker
   //! See chapter 5 of 'Mazes for Programmers' by Jamis Buck for implementation details.
   constexpr static generate(Graph graph, Graph::Cell start = Graph::Cell()) {
     if (!start.valid()) {
-      start = Graph.random_cell(); // TODO return Graph::Cell
+      start = Graph.random_cell();
     }
 
     std::stack<Graph::Cell> stack;
@@ -28,7 +28,7 @@ class RecursiveBacktracker
       auto current = stack.back();
 
       // Select only the neighbours with no links
-      auto ns = current.neighbours(); // TODO return std::vector<Graph::Cell>
+      auto ns = current.neighbours();
       ns.erase(
         std::remove_if(ns.begin(), ns.end(),
           [](Cell n) {
