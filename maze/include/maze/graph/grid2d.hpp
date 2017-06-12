@@ -48,6 +48,16 @@ public:
       return m_grid->relative_cell(m_index, 0, -1);
     }
 
+    //! Get any valid neighbours around this cell.
+    std::vector<Cell> neighbours() const {
+      std::vector<Cell> ns;
+      if (north().valid()) ns.push_back(north());
+      if (east().valid()) ns.push_back(east());
+      if (south().valid()) ns.push_back(south());
+      if (west().valid()) ns.push_back(west());
+      return ns;
+    }
+
     //! Cell equality operator.
     constexpr bool operator==(Cell cell) {
       return (cell.m_index == m_index) && (cell.m_grid == m_grid);
