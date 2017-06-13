@@ -69,7 +69,7 @@ public:
     }
 
     //! Cell equality operator.
-    constexpr bool operator==(Cell cell) {
+    constexpr bool operator==(Cell cell) const {
       return (cell.m_index == m_index) && (cell.m_grid == m_grid);
     }
 
@@ -83,7 +83,7 @@ public:
   Grid2d() {
     // Each cell's index is it's position in array. This is effectively the same
     // as iterating over rows and columns and setting as r * ROWS + c
-    for (size_t i = 0; i < size(); ++i) {
+    for (int i = 0; i < size(); ++i) {
       m_cells[i].m_index = i;
       m_cells[i].m_grid = this;
     }
@@ -100,8 +100,13 @@ public:
   }
 
   //! Return the total number of cells.
-  static constexpr size_t size() {
+  static constexpr int size() {
     return SIZE;
+  }
+
+  //! Return true if the row and column is valid.
+  static constexpr bool valid_position(int row, int column) {
+    return (row >= 0) && (row < ROWS) && (column >= 0) && (column < COLUMNS);
   }
 
   //! Return true if the cell index lies within this grid.
@@ -110,48 +115,29 @@ public:
   }
 
   //! Return index of cell at (r, c) or INVALID_INDEX if not in grid.
-  static constexpr int cell_index(int r, int c) {
-    int index = r * COLUMNS + c;
-
-    // Special case for invalid columns. Above arithmetic fails if column
-    // overflows onto next row, or underflows onto previous.
-    if ((c < 0) || (c >= COLUMNS)) {
-      index = INVALID_INDEX;
-    }
-
-    // TODO bad logic: this is not catering correctly for row overflows
-    return valid_index(index) ? index : INVALID_INDEX;
+  static constexpr int cell_index(int row, int column) {
+    return valid_position(row, column) ? ((row * COLUMNS) + column) : INVALID_INDEX;
   }
 
-  //! Determine the row and column of a cell from a given index.
-  static constexpr bool cell_row_column(int index, int& row, int& column) {
-    row = index / COLUMNS;
-    column = index % COLUMNS;
-    return valid_index(index);
+  //! Get the row for the given cell index.
+  static constexpr int cell_row(int index) {
+    return index / COLUMNS;
+  }
+
+  //! Get the column for the given cell index.
+  static constexpr int cell_column(int index) {
+    return index % COLUMNS;
   }
 
   //! Get a cell relative to a cell's position.
   //! dr is row offset and dc is column offset.
   constexpr Cell relative_cell(int cell_index, int dr, int dc) const {
-    int row = 0;
-    int column = 0;
-    if (cell_row_column(cell_index, row, column)) {
-      return cell_at(row + dr, column + dc);
-    }
-    else {
-      return Cell::create_invalid();
-    }
+    return cell_at(cell_row(cell_index) + dr, cell_column(cell_index) + dc);
   }
 
   //! Get the cell at a given row and column.
-  constexpr Cell cell_at(int r, int c) const {
-    const int index = cell_index(r, c);
-    if (index == INVALID_INDEX) {
-      return Cell::create_invalid();
-    }
-    else {
-      return m_cells[index];
-    }
+  constexpr Cell cell_at(int row, int column) const {
+    return valid_position(row, column) ? m_cells[cell_index(row, column)] : Cell();
   }
 
   //! Get a random cell in this grid.
